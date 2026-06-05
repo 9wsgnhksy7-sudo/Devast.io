@@ -1833,8 +1833,14 @@ if (col && col.length) {
         const g = ᴏހ̎٦;
         const cfg = Ꮷցࡀ١͡;
 
-        const arr = g[ᴏ११ܝ];
-        for (const p of arr[ᴇ๓ނނ]) p[ᴏܝ๓̶](-1,-1,-1,-1);
+       const col = arr[ᴇ๓ނނ];
+
+if (col && col.length) {
+    for (let i = 0; i < col.length; i++) {
+        const p = col[i];
+        if (p) p[ᴏܝ๓̶](-1,-1,-1,-1);
+    }
+}
 
         if (this[ᴄ̶̶̂]()) return;
 
