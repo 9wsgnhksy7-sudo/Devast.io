@@ -52600,14 +52600,30 @@ var ᴄ७ᴉҐ̣ = function() {
         ﾠո٢р๔[ᴏނ१ܝ]
     ];
 
-    // ===== FORCE MONOSPACE + WHITE START =====
-    ﾠո٢р๔[ᴇܖނ‍] = "monospace";   // font family only monospace
-    ﾠո٢р๔[ᴏނ๓ܝ] = "#fff";        // fill color white
-    ﾠո٢р๔[ᴏނ१ܝ] = ᴎᴑࡀᴉ * 2.5;
+   // ===== FORCE MONOSPACE + READABLE UI START =====
+ﾠո٢р๔[ᴇܖނ‍] = "monospace";
+ﾠո٢р๔[ᴏނ๓ܝ] = "#fff";   // fill
+ﾠո٢р๔[ᴏނ१ܝ] = ᴎᴑࡀᴉ * 2.5;
 
-    ﾠո٢р๔[ᴄܖ̂] = "#000";         // stroke/outline forced white
-    ﾠո٢р๔[ᴇ๓̂१] = "center";
-    // ===== FORCE MONOSPACE + WHITE END =====
+ﾠո٢р๔[ᴄܖ̂] = "#000";    // stroke (keep black ALWAYS stable)
+ﾠո٢р๔[ᴇ๓̂१] = "center";
+
+// IMPORTANT: force stroke first pass
+ﾠո٢р๔[ᴄܖ̂] = "#000";
+ﾠո٢р๔[ⲅނܝ̂](
+    օނ̂๓[ᴇނܖ][ᴘ๓๓१](Ꮷ̏๖.ᴀㅤᅠᴇр[ιܝܝ][ⲟނނ๓]),
+    /* x */ null,
+    /* y */ null
+);
+
+// then fill pass
+ﾠո٢р๔[ᴏނ๓ܝ] = "#fff";
+ﾠո٢р๔[ⲅ̂๓](
+    օނ̂๓[ᴇނܖ][ᴘ๓๓१](Ꮷ̏๖.ᴀㅤᅠᴇр[ιܝܝ][ⲟނނ๓]),
+    /* x */ null,
+    /* y */ null
+);
+// ===== FORCE MONOSPACE + READABLE UI END =====
 
     ﾠո٢р๔[ⲅ̂๓](օނ̂๓[ᴇނܖ][ᴘ๓๓१](Ꮷ̏๖.ᴀㅤᅠᴇр[ιܝܝ][ⲟނނ๓]), վρаܖܝ, ᴚе๑๘օ);
     ﾠո٢р๔[ⲅނܝ̂](օނ̂๓[ᴇނܖ][ᴘ๓๓१](Ꮷ̏๖.ᴀㅤᅠᴇр[ιܝܝ][ⲟނނ๓]), վρаܖܝ, ᴚе๑๘օ);
