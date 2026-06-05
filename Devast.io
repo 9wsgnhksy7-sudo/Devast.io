@@ -52611,9 +52611,9 @@ var ᴄ७ᴉҐ̣ = function() {
     ﾠո٢р๔[ᴇ๓̂१] = "center";
 
     // 🔥 CRITICAL READABILITY FIX
-    ﾠո٢р๔.lineWidth = 4;
-    ﾠո٢р๔.shadowColor = "rgba(0,0,0,0.75)";
-    ﾠո٢р๔.shadowBlur = 3;
+    ﾠո٢р๔.lineWidth = 2;
+    ﾠո٢р๔.shadowColor = "rgba(0,0,0,0.5)";
+    ﾠո٢р๔.shadowBlur = 1;
     // ===========================
 
     // MAIN TEXT
