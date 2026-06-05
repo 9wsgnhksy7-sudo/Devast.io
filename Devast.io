@@ -52605,7 +52605,7 @@ var ᴄ७ᴉҐ̣ = function() {
     ﾠո٢р๔[ᴏނ๓ܝ] = "#fff";        // fill color white
     ﾠո٢р๔[ᴏނ१ܝ] = ᴎᴑࡀᴉ * 2.5;
 
-    ﾠո٢р๔[ᴄܖ̂] = "#fff";         // stroke/outline forced white
+    ﾠո٢р๔[ᴄܖ̂] = "#000";         // stroke/outline forced white
     ﾠո٢р๔[ᴇ๓̂१] = "center";
     // ===== FORCE MONOSPACE + WHITE END =====
 
