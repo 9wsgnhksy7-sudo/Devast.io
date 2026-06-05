@@ -1833,7 +1833,8 @@ if (col && col.length) {
         const g = ᴏހ̎٦;
         const cfg = Ꮷցࡀ١͡;
 
-       const col = arr[ᴇ๓ނނ];
+        const arr = g[ᴏ११ܝ];
+        const col = arr[ᴇ๓ނނ];
 
 if (col && col.length) {
     for (let i = 0; i < col.length; i++) {
