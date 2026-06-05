@@ -1795,7 +1795,12 @@ class ովса {
         this[ιܖ११] = false;
 
         const col = g[ᴏ११ܝ][ᴇ๓ނނ];
-        for (const p of col) p[ᴏܝ๓̶](-1,-1,-1,-1);
+if (col && col.length) {
+    for (let i = 0; i < col.length; i++) {
+        const p = col[i];
+        if (p) p[ᴏܝ๓̶](-1,-1,-1,-1);
+    }
+}
 
         g[օܖނ๓] = 0x0;
 
