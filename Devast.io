@@ -1925,12 +1925,10 @@ if (col && col.length) {
                 y = target[ᴇܖ̂๓] + t * (target[ᴇܖ̂๓] - target[ᴏ‍‍][0]);
             }
 
-            const denom = cfg[ᴇނܖ] ? cfg[ᴇނܖ][ᴘ̶ނܝ] : null;
-
-let ang = Math[ᴘ๓๓१](
-    Math[ᴄܖ१๓]((y - base[ᴇܖ̂๓]) / (x - base[ⲅܖ‍ނ])) *
-    0xb4 / (denom || 1)
-);
+            let ang = Math[ᴘ๓๓१](
+                Math[ᴄܖ१๓]((y - base[ᴇܖ̂๓]) / (x - base[ⲅܖ‍ނ])) *
+                0xb4 / cfg[ᴇނܖ][ᴘ̶ނܝ]
+            );
 
             if (x < base[ⲅܖ‍ނ]) ang += 0xb4;
 
@@ -91559,4 +91557,3 @@ var ᴑᅠᅠᏧց = setInterval(function() {
         ӧܕα[ⲟ̂‍] = еࡀⲉᅟ;
     }, 0xfa);
 }, 0x64);
-      
