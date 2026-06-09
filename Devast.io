@@ -52604,7 +52604,7 @@ var ᴄ७ᴉҐ̣ = function() {
     ﾠո٢р๔[ᴇܖނ‍] = ᴎᴑࡀᴉ * 0x12 + "px monospace";
     ﾠո٢р๔[ᴏނ๓ܝ] = "#FFFFFF";   // fill (white)
     ﾠո٢р๔[ᴄܖ̂] = "#000000";     // stroke (black)
-    ﾠո٢р๔[ᴏނ१ܝ] = 0.8;          // IMPORTANT: thin outline
+    ﾠո٢р๔[ᴏނ१ܝ] = 1.5;          // IMPORTANT: thin outline
     ﾠո٢р๔[ᴇ๓̂१] = "center";
 
     /* draw */
