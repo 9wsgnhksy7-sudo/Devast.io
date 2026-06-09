@@ -1831,6 +1831,7 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
   [ᴏܖ̂]() {
     switch (Ꮷցࡀ١͡[օ११]) {
     case 'linear':
+
         var ⲅⲅ̎٦α = ᴏހ̎٦.օᴏ๘ࡅ(Ꮷ̏๖.І५๖[ᴏ१๓๓]), Ґ‌̶̏;
 
         if (Ꮷցࡀ١͡[ᴇ̂̂ܝ] > -0x1) {
@@ -1851,52 +1852,55 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
         let ⲉށ༦ = Ґ‌̶̏[ᴇܖ̂๓];
 
         // =========================================================
-        // FIXED: stable spring smoothing (position + velocity)
+        // RESTORED: COEFFICIENT-BASED SYSTEM (your menu works again)
         // =========================================================
 
-        if (this._sx == null) this._sx = ⲕρބ३ܖ;
-        if (this._sy == null) this._sy = ⲉށ༦;
-        if (this._vx == null) this._vx = 0;
-        if (this._vy == null) this._vy = 0;
+        let distCoef = (Ꮷցࡀ١͡[ᴄ̶๓̂] ?? 1.0);   // distance coefficient
+        let offCoef  = (Ꮷցࡀ١͡[ᴇܝ๓ܖ] ?? 1.0);   // offset coefficient
+
+        // initialize state
+        if (this._lx == null) this._lx = ⲅⲅ̎٦α[ⲅܖ‍ނ];
+        if (this._ly == null) this._ly = ⲅⲅ̎٦α[ᴇܖ̂๓];
         if (this._a  == null) this._a  = 0;
 
-        const stiffness = 0.18;   // responsiveness
-        const damping   = 0.78;   // stability (lower = more damping)
-
-        let dxT = ⲕρބ३ܖ - this._sx;
-        let dyT = ⲉށ༦ - this._sy;
-
-        this._vx = (this._vx + dxT * stiffness) * damping;
-        this._vy = (this._vy + dyT * stiffness) * damping;
-
-        this._sx += this._vx;
-        this._sy += this._vy;
-
         // =========================================================
-        // ANGLE CALCULATION (stable + jitter safe)
+        // POSITION (DIRECT + CONTROLLED PREDICTION STYLE)
         // =========================================================
 
-        let dx = this._sx - ⲅⲅ̎٦α[ⲅܖ‍ނ];
-        let dy = this._sy - ⲅⲅ̎٦α[ᴇܖ̂๓];
+        let dx = ⲕρބ३ܖ - this._lx;
+        let dy = ⲉށ༦ - this._ly;
 
-        // prevent micro jitter flips
-        if (dx * dx + dy * dy < 0.00001) {
-            return this[ⲟ१ނ];
-        }
+        // apply distance coefficient (IMPORTANT FOR YOUR MENU)
+        this._lx += dx * distCoef;
+        this._ly += dy * distCoef;
 
-        let targetAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+        // optional offset influence (kept compatible)
+        this._lx += dx * (offCoef - 1.0);
+        this._ly += dy * (offCoef - 1.0);
+
+        // jitter clamp (light, not smoothing)
+        if (Math.abs(dx) < 0.00001) this._lx = ⲕρބ३ܖ;
+        if (Math.abs(dy) < 0.00001) this._ly = ⲉށ༦;
+
+        // =========================================================
+        // ANGLE (PREDICTION FRIENDLY)
+        // =========================================================
+
+        let adx = this._lx - ⲅⲅ̎٦α[ⲅܖ‍ނ];
+        let ady = this._ly - ⲅⲅ̎٦α[ᴇܖ̂๓];
+
+        let targetAngle = Math.atan2(ady, adx) * 180 / Math.PI;
         targetAngle = (targetAngle + 360) % 360;
 
-        // shortest angle difference
         let diff = ((targetAngle - this._a + 540) % 360) - 180;
 
-        // angular smoothing (spring-like)
-        this._a += diff * 0.22;
+        // IMPORTANT: no heavy smoothing anymore
+        this._a += diff * 0.55;
 
         let ᴘ̏ܖގ = this._a;
 
         // =========================================================
-        // OUTPUT + existing logic preserved
+        // OUTPUT
         // =========================================================
 
         if (Ꮷցࡀ١͡[ᴄ̶๓̂]) {
