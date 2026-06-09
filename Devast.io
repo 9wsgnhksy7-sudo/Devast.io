@@ -1828,7 +1828,7 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
         }
         ;return false;
     }
-   [ᴏܖ̂]() {
+  [ᴏܖ̂]() {
     switch (Ꮷցࡀ١͡[օ११]) {
     case 'linear':
         var ⲅⲅ̎٦α = ᴏހ̎٦.օᴏ๘ࡅ(Ꮷ̏๖.І५๖[ᴏ१๓๓]), Ґ‌̶̏;
@@ -1850,42 +1850,54 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
         let ⲕρބ३ܖ = Ґ‌̶̏[ⲅܖ‍ނ];
         let ⲉށ༦ = Ґ‌̶̏[ᴇܖ̂๓];
 
-        // -------------------------
-        // FIX 1: single consistent smoothing state
-        // -------------------------
+        // =========================================================
+        // FIXED: stable spring smoothing (position + velocity)
+        // =========================================================
+
         if (this._sx == null) this._sx = ⲕρބ३ܖ;
         if (this._sy == null) this._sy = ⲉށ༦;
-        if (this._a == null) this._a = 0;
+        if (this._vx == null) this._vx = 0;
+        if (this._vy == null) this._vy = 0;
+        if (this._a  == null) this._a  = 0;
 
-        // stable exponential smoothing
-        this._sx = this._sx + (ⲕρބ३ܖ - this._sx) * 0.22;
-        this._sy = this._sy + (ⲉށ༦ - this._sy) * 0.22;
+        const stiffness = 0.18;   // responsiveness
+        const damping   = 0.78;   // stability (lower = more damping)
 
-        // -------------------------
-        // FIX 2: NO slope math (only atan2)
-        // -------------------------
+        let dxT = ⲕρބ३ܖ - this._sx;
+        let dyT = ⲉށ༦ - this._sy;
+
+        this._vx = (this._vx + dxT * stiffness) * damping;
+        this._vy = (this._vy + dyT * stiffness) * damping;
+
+        this._sx += this._vx;
+        this._sy += this._vy;
+
+        // =========================================================
+        // ANGLE CALCULATION (stable + jitter safe)
+        // =========================================================
+
         let dx = this._sx - ⲅⲅ̎٦α[ⲅܖ‍ނ];
         let dy = this._sy - ⲅⲅ̎٦α[ᴇܖ̂๓];
 
-        let targetAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+        // prevent micro jitter flips
+        if (dx * dx + dy * dy < 0.00001) {
+            return this[ⲟ१ނ];
+        }
 
-        // normalize
+        let targetAngle = Math.atan2(dy, dx) * 180 / Math.PI;
         targetAngle = (targetAngle + 360) % 360;
 
-        // -------------------------
-        // FIX 3: smooth angle properly
-        // -------------------------
+        // shortest angle difference
         let diff = ((targetAngle - this._a + 540) % 360) - 180;
-        this._a += diff * 0.30;
+
+        // angular smoothing (spring-like)
+        this._a += diff * 0.22;
 
         let ᴘ̏ܖގ = this._a;
 
-        // -------------------------
-        // FIX 4: remove instability flip
-        // -------------------------
-        if (Math.abs(dx) < 0.0001 && Math.abs(dy) < 0.0001) {
-            return this[ⲟ१ނ];
-        }
+        // =========================================================
+        // OUTPUT + existing logic preserved
+        // =========================================================
 
         if (Ꮷցࡀ١͡[ᴄ̶๓̂]) {
             сⲉ‍.ᴑ१ࡆ(օނ̂๓[ⲅ१ܖ][ⲟܖ१̂]([0x6, ᴘ̏ܖގ]));
