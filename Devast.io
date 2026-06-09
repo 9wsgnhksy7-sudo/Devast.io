@@ -1847,62 +1847,45 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
         if (Ґ‌̶̏ === null)
             return this[ⲟ१ނ];
 
-        let ⲕρބ३ܖ, ⲉށ༦;
+        let ⲕρބ३ܖ = Ґ‌̶̏[ⲅܖ‍ނ];
+        let ⲉށ༦ = Ґ‌̶̏[ᴇܖ̂๓];
 
-        if (Ґ‌̶̏[ᴄ๓̂̂][0x0] === -0x1) {
-            ⲕρބ३ܖ = Ґ‌̶̏[ⲅܖ‍ނ];
-            ⲉށ༦ = Ґ‌̶̏[ᴇܖ̂๓];
-        } else {
-            var ᴄ๖ގ = ςᴏތ̏ܕ(ⲅⲅ̎٦α, Ґ‌̶̏);
-            var Ꮛܛ̋ᴉ = Ꮷցࡀ١͡[ⲟ१ނܝ],
-                ᴘςࡁ१ = Ꮷցࡀ١͡[ⲟ१ܝ̶];
+        // -------------------------
+        // FIX 1: single consistent smoothing state
+        // -------------------------
+        if (this._sx == null) this._sx = ⲕρބ३ܖ;
+        if (this._sy == null) this._sy = ⲉށ༦;
+        if (this._a == null) this._a = 0;
 
-            if (Ꮷցࡀ١͡[ᴄ̶̂]) {
-                if (ᴄ๖ގ <= Ꮷցࡀ١͡[ᴏܝ‍̂]) {
-                    Ꮛܛ̋ᴉ = Ꮷցࡀ١͡[ι̂ܝ̶];
-                    ᴘςࡁ१ = Ꮷցࡀ١͡[օ११ܖ];
-                } else if (ᴄ๖ގ <= Ꮷցࡀ١͡[օ๓๓ނ]) {
-                    Ꮛܛ̋ᴉ = Ꮷցࡀ١͡[ᴄ̂๓ܝ];
-                    ᴘςࡁ१ = Ꮷցࡀ١͡[ᴇܖ̂१];
-                } else {
-                    Ꮛܛ̋ᴉ = Ꮷցࡀ١͡[ᴘ̶๓‍];
-                    ᴘςࡁ१ = Ꮷցࡀ١͡[ᴘ̂ނ̂];
-                }
-            }
+        // stable exponential smoothing
+        this._sx = this._sx + (ⲕρބ३ܖ - this._sx) * 0.22;
+        this._sy = this._sy + (ⲉށ༦ - this._sy) * 0.22;
 
-            var նܛᴑ̣̂ = ᴄ๖ގ / Ꮛܛ̋ᴉ + ᴘςࡁ१;
+        // -------------------------
+        // FIX 2: NO slope math (only atan2)
+        // -------------------------
+        let dx = this._sx - ⲅⲅ̎٦α[ⲅܖ‍ނ];
+        let dy = this._sy - ⲅⲅ̎٦α[ᴇܖ̂๓];
 
-            ⲕρބ३ܖ = Ґ‌̶̏[ⲅܖ‍ނ] + նܛᴑ̣̂ * (Ґ‌̶̏[ⲅܖ‍ނ] - Ґ‌̶̏[ᴄ๓̂̂][0x0]);
-            ⲉށ༦ = Ґ‌̶̏[ᴇܖ̂๓] + նܛᴑ̣̂ * (Ґ‌̶̏[ᴇܖ̂๓] - Ґ‌̶̏[ᴏ‍‍][0x0]);
+        let targetAngle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+        // normalize
+        targetAngle = (targetAngle + 360) % 360;
+
+        // -------------------------
+        // FIX 3: smooth angle properly
+        // -------------------------
+        let diff = ((targetAngle - this._a + 540) % 360) - 180;
+        this._a += diff * 0.30;
+
+        let ᴘ̏ܖގ = this._a;
+
+        // -------------------------
+        // FIX 4: remove instability flip
+        // -------------------------
+        if (Math.abs(dx) < 0.0001 && Math.abs(dy) < 0.0001) {
+            return this[ⲟ१ނ];
         }
-
-        // =========================
-        // FIX: stable angle system
-        // =========================
-
-        if (this._ang_smooth == null) this._ang_smooth = 0;
-        if (this._tx == null) this._tx = ⲕρބ३ܖ;
-        if (this._ty == null) this._ty = ⲉށ༦;
-
-        this._tx += (ⲕρބ३ܖ - this._tx) * 0.25;
-        this._ty += (ⲉށ༦ - this._ty) * 0.25;
-
-        var ᴘ̏ܖގ = Math[ᴘ๓๓१](
-            Math.atan2(
-                this._ty - ⲅⲅ̎٦α[ᴇܖ̂๓],
-                this._tx - ⲅⲅ̎٦α[ⲅܖ‍ނ]
-            ) * 0xb4 / Math.PI
-        );
-
-        var diff = ((ᴘ̏ܖގ - this._ang_smooth + 540) % 360) - 180;
-        this._ang_smooth += diff * 0.35;
-
-        ᴘ̏ܖގ = this._ang_smooth;
-
-        // =========================
-
-        if (ⲕρބ३ܖ < ⲅⲅ̎٦α[ⲅܖ‍ނ])
-            ᴘ̏ܖގ += 0xb4;
 
         if (Ꮷցࡀ١͡[ᴄ̶๓̂]) {
             сⲉ‍.ᴑ१ࡆ(օނ̂๓[ⲅ१ܖ][ⲟܖ१̂]([0x6, ᴘ̏ܖގ]));
