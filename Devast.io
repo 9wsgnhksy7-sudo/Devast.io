@@ -1697,7 +1697,7 @@ function ςᴏތ̏ܕ(ⲉࡅс٠, ᴎᏧςᴚ) {
         }
         this.ρ०͡ܕᴌ = [],
         this[ᴏ११ܝ] = [],
-        this[ᴏ११ܝ][ⲅ๓ܝܖ](new ᴘվ०ࡅᎠ(0.6,0x1,"#7DF9FF")),
+        this[ᴏ११ܝ][ⲅ๓ܝܖ](new ᴘվ०ࡅᎠ(0.6,0x1,Ꮷցࡀ١͡.visualizeResolvingColor)),
         this[ᴏ११ܝ][ⲅ๓ܝܖ](new ᴘվ०ࡅᎠ(0.8,0x3,"#FF0000")),
         this[ᴏ११ܝ][ⲅ๓ܝܖ](new ᴘվ०ࡅᎠ(0.8,0x3,"#00FF00")),
         this[ᴏ११ܝ][ⲅ๓ܝܖ](new ᴘվ०ࡅᎠ(0.8,0x2,"#0000FF")),
@@ -2191,6 +2191,7 @@ var Ꮩގ̣ = new е१ܐᴌࡀ();
     ᴘ༦๑ց٦[ι๓१](Ꮷցࡀ١͡, "AddWoodEnabled")[ι११]("AddWoodEnabled");
     ᴘ༦๑ց٦[ι๓१](Ꮷցࡀ١͡, "AutoAcceptAndKickEnabled")[ι११]("AutoAcceptAndKickEnabled");
     const ᴎІс๓ո = նᴀށᴎܕ[ᴄܖ१]("AimBot");
+    ᴎІс๓ո[ᴇނ̶ܝ](Ꮷցࡀ١͡, "visualizeResolvingColor")[ι११]("Resolving Color");
     const ⲉ๔ⲅ̷̣ = ᴎІс๓ո[ι๓१](Ꮷցࡀ١͡, "AimBotEnabled")[ι११]("AimBotEnabled");
     ᴎІс๓ո[ι๓१](Ꮷցࡀ١͡, "hideAimbotAngle")[ι११]("HideAimbotAngle");
     ᴎІс๓ո[ι๓१](Ꮷցࡀ١͡, "ShowRealAngles", ["always", "withAim"])[ι११]("ShowRealAngles");
